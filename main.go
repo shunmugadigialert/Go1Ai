@@ -15,6 +15,7 @@ import (
 	"os"
 	"os/exec"
 	"strconv"
+	"math"
 )
 
 func main() {
@@ -134,7 +135,13 @@ func main() {
 	// If the input string represents a number that is too large for the target integer type, it can cause unexpected behavior or security issues.
 	// Best practice is to use appropriate integer types with sufficient range and perform proper error handling and input validation.
 	val := resp.Request.URL.Query().Get("val")
-	num, _ := strconv.Atoi(val)
+	num, err := strconv.Atoi(val)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if num < math.MinInt16 || num > math.MaxInt16 {
+		log.Fatal("value out of range for int16")
+	}
 	var intVal int16 = int16(num)
 	fmt.Println(intVal)
 
