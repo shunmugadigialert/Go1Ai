@@ -94,7 +94,7 @@ func main() {
 	// Older TLS versions have weaknesses that can be exploited by attackers to compromise the security of the connection.
 	// Best practice is to use a minimum TLS version of 1.2 or higher and disable support for older, insecure versions.
 	config := &tls.Config{
-		MinVersion: tls.VersionSSL30,
+		MinVersion: tls.VersionTLS12,
 	}
 	_, _ = tls.Dial("tcp", "example.com:443", config)
 
